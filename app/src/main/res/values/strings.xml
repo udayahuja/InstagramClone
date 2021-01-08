@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Instagram</string>
+    <string name="forgotPass"><font color="#C0C0C0">Forgot your login details? </font>
+        <b><font fgcolor="#000000">Get help logging in.</font></b></string>
+    <string name="dontHaveAnAcc"><font color="#C0C0C0">Don\'t have an account? </font>
+        <b><font fgcolor="#000000">Sign Up.</font></b></string>
+    <string name="alreadyHaveAnAcc"><font color="#C0C0C0">Already have an account? </font>
+        <b><font fgcolor="#000000">Log In.</font></b></string>
+
+    <string name="zero_posts">You have zero posts upload some of your perfect pics!!!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+</resources>

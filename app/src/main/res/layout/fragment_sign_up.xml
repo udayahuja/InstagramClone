@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpFragment">
+
+
+    <ImageView
+        android:id="@+id/accImage"
+        android:layout_width="226dp"
+        android:layout_height="167dp"
+        android:layout_marginStart="106dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="107dp"
+        android:src="@drawable/account_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.814"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/signUpPhone"
+        android:layout_width="95dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="60dp"
+        android:text="Phone"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/accImage"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/accImage"
+        app:layout_constraintTop_toBottomOf="@+id/accImage" />
+
+
+    <View
+        android:id="@+id/phoneDivider"
+        android:layout_width="149dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="24dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="@+id/signUpPhone"
+        app:layout_constraintHorizontal_bias="0.685"
+        app:layout_constraintStart_toStartOf="@+id/signUpPhone"
+        app:layout_constraintTop_toBottomOf="@+id/signUpPhone" />
+
+
+    <View
+        android:id="@+id/emailDivider"
+        android:layout_width="149dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="24dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="@+id/signupEmail"
+        app:layout_constraintHorizontal_bias="0.239"
+        app:layout_constraintStart_toStartOf="@+id/signupEmail"
+        app:layout_constraintTop_toBottomOf="@+id/signupEmail" />
+
+    <TextView
+        android:id="@+id/signupEmail"
+        android:layout_width="103dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="60dp"
+        android:text="Email"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/accImage"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/accImage"
+        app:layout_constraintTop_toBottomOf="@+id/accImage" />
+
+    <LinearLayout
+        android:id="@+id/phoneLinearLayout"
+        android:layout_width="370dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+
+        app:layout_constraintEnd_toEndOf="@+id/emailDivider"
+        app:layout_constraintStart_toStartOf="@+id/phoneDivider"
+        app:layout_constraintTop_toBottomOf="@+id/emailDivider">
+
+        <EditText
+            android:id="@+id/signupPhoneNo"
+            android:layout_width="326dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:ems="10"
+            android:hint="Enter yout phone number"
+            android:textSize="15sp"
+            android:paddingLeft="15dp"
+            android:inputType="phone"
+            tools:layout_editor_absoluteX="47dp"
+            tools:layout_editor_absoluteY="422dp" />
+
+        <TextView
+            android:layout_width="327dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:textAlignment="center"
+            android:layout_marginTop="15dp"
+            android:text="You may receive text updates from instagram and can opt out at any time" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/emailLinearLayout"
+        android:layout_width="370dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/emailDivider"
+        app:layout_constraintStart_toStartOf="@+id/phoneDivider"
+        app:layout_constraintTop_toBottomOf="@+id/emailDivider">
+
+        <EditText
+            android:id="@+id/signupEmailId"
+            android:layout_width="326dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:ems="10"
+            android:hint="Enter yout email id"
+            android:textSize="15sp"
+            android:paddingLeft="15dp"
+            android:inputType="textEmailAddress"
+            tools:layout_editor_absoluteX="47dp"
+            tools:layout_editor_absoluteY="422dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="334dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="120dp"
+        android:backgroundTint="@color/skyblue"
+
+        android:text="Next"
+        app:layout_constraintBottom_toTopOf="@+id/divider6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/alreadyHaveAnAcc"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="@string/alreadyHaveAnAcc"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/divider6"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/alreadyHaveAnAcc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
