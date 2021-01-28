@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,13 +21,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 public class ProfileFragment extends Fragment {
 
 
     private GridView mGridView;
     private TextView mNoOfPosts;
     private TextView mZeroPosts;
+    private TextView mNoOfFollowers;
+    private TextView mNoOfFollowing;
+    private TextView mUsername;
+    private TextView mName;
     private ImageAdapter adapter;
+
+    private final String TAG = "error";
 
     private int tempInt = 0;
     private Button tempIncrement;
@@ -51,10 +65,28 @@ public class ProfileFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /*
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.profile_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int itemSelected = item.getItemId();
+        if(itemSelected == R.id.settings){
+            Toast.makeText(getContext(),"settings selected", Toast.LENGTH_SHORT).show();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+*/
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+        //setHasOptionsMenu(true);
     }
 
     @Override
@@ -68,6 +100,10 @@ public class ProfileFragment extends Fragment {
         mGridView.setAdapter(adapter);
         mNoOfPosts = view.findViewById(R.id.profile_no_of_posts);
         mZeroPosts = view.findViewById(R.id.profile_zero_posts);
+        mNoOfFollowers = view.findViewById(R.id.profile_no_of_followers);
+        mNoOfFollowing = view.findViewById(R.id.profile_no_of_following);
+        mUsername = view.findViewById(R.id.profile_username);
+        mName = view.findViewById(R.id.profile_name);
 
         tempIncrement = view.findViewById(R.id.increment_button);
         tempDecrement = view.findViewById(R.id.decrement_button);
@@ -79,7 +115,9 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mNoOfPosts.setText(tempInt+"\nPosts");
-
+        mUsername.setText(SignInFragment.user.getUsername());
+        mName.setText(SignInFragment.user.getName());
+        initializeFollowersAndFollowing(getContext());
         tempIncrement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +138,30 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void initializeFollowersAndFollowing(Context context){
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = MainActivity.BASE_URL + "no-of-followers-and-following/"+SignInFragment.user.getId();
+
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response == null){
+                    Toast.makeText(context, "There was some error while getting followers",Toast.LENGTH_SHORT).show();
+                }
+                String []s = response.split("-");
+                mNoOfFollowers.setText(s[0]+"\nFollowers");
+                mNoOfFollowing.setText(s[1]+"\nFollowing");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "onErrorResponse: error while getting followers and following");
+            }
+        });
+        queue.add(request);
     }
 
     void updateGrid(){
@@ -151,4 +213,9 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initializeFollowersAndFollowing(getContext());
+    }
 }

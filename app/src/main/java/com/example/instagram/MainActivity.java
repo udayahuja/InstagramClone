@@ -11,7 +11,7 @@ import android.widget.FrameLayout;
 public class MainActivity extends AppCompatActivity {
 
     private FrameLayout mFrameLayout;
-    static  final String BASE_URL= "http://192.168.1.6:8080/";
+    static  final String BASE_URL= "http://192.168.43.78:8080/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -12,30 +12,53 @@ import androidx.fragment.app.Fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Picture;
 import android.hardware.Camera;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import java.io.File;
+import android.provider.MediaStore.Files.FileColumns;
 
 public class StoryCameraFragment extends Fragment {
 
 
+    private final String TAG = "error";
     private Camera mCamera;
     private TextView mGrantPermission;
     private CameraPreview mPreview;
     private FrameLayout preview;
+    private Button mCaptureButton;
     private static final int CAMERA_REQUEST_CODE = 5642;
+    private Uri fileUri1;
     public StoryCameraFragment(){
 
     }
+
+    //Callback funtion to take picture this is called when we click capture from camera
+    private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
+        @Override
+        public void onPictureTaken(byte[] data, Camera camera) {
+            Log.d(TAG, "onPictureTaken: "+data);
+        }
+    };
+
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +86,7 @@ public class StoryCameraFragment extends Fragment {
                     CAMERA_REQUEST_CODE);
         }
 
+        mCaptureButton = view.findViewById(R.id.button_capture);
 
         return view;
     }
@@ -88,7 +112,15 @@ public class StoryCameraFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mCaptureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCamera.takePicture(null, null, mPicture);
+            }
+        });
     }
+
+
 
     private boolean checkCameraHardware(Context context) {
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){

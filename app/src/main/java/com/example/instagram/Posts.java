@@ -13,6 +13,7 @@ public class Posts {
 
     private Posts(Context context){
         mSinglePosts = new ArrayList<>();
+
         Random r = new Random();
         for(int i=0;i<50;i++){
             SinglePost s = new SinglePost();
